@@ -2,10 +2,10 @@ import telebot
 from pyowm import OWM
 from telebot import types
 import buttons
+from Token import API_TOKEN, OWM_TOKEN
 
-owm = OWM('4c714a80d1c7bbf3329a0f310a5ab450')
+owm = OWM(OWM_TOKEN)
 mgr = owm.weather_manager()
-API_TOKEN = '5352403062:AAEkTwEEcCnNSJSqYzi9xyZzenwosHxSMcQ'
 bot = telebot.TeleBot(API_TOKEN)
 
 @bot.message_handler(commands=['start'])
