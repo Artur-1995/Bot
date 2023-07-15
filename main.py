@@ -2,7 +2,7 @@ import telebot
 from pyowm import OWM
 from telebot import types
 import buttons
-from Token import API_TOKEN, OWM_TOKEN
+from Tokens import API_TOKEN, OWM_TOKEN
 
 owm = OWM(OWM_TOKEN)
 mgr = owm.weather_manager()
