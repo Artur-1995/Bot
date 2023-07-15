@@ -1,9 +1,12 @@
+# до запуска программы убедителсь, что все библиотеки установленны
+# "pip install -r requirements.txt"
 import buttons
+from Token import API_TOKEN
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 
-bot = Bot(buttons.API_TOKEN)
+bot = Bot(API_TOKEN)
 dp = Dispatcher(bot)
 
 @dp.message_handler(commands=['start'])

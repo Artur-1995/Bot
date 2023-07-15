@@ -1,6 +1,5 @@
 from telebot import types
 
-API_TOKEN = '5352403062:AAEkTwEEcCnNSJSqYzi9xyZzenwosHxSMcQ'
 
 kb = types.InlineKeyboardMarkup(row_width=1)
 btn1 = types.InlineKeyboardButton(text='Ввести название города', callback_data='btn1')
