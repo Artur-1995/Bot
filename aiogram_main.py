@@ -1,10 +1,7 @@
-# до запуска программы убедителсь, что все библиотеки установленны
-# "pip install -r requirements.txt"
 import buttons
 from Token import API_TOKEN
-from aiogram import Bot, types
-from aiogram.dispatcher import Dispatcher
-from aiogram.utils import executor
+from aiogram import Bot, types, Dispatcher, executor
+
 
 bot = Bot(API_TOKEN)
 dp = Dispatcher(bot)
