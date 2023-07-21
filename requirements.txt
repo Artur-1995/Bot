@@ -1,2 +1,4 @@
 # "pip install -r requirements.txt"
 aiogram
+telebot
+pyowm
