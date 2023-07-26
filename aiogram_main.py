@@ -2,26 +2,21 @@ from Tokens import API_TOKEN, OWM_TOKEN
 from aiogram import Bot, types, Dispatcher, executor
 from pyowm import OWM
 import random
-import os
 
-excepshon_answer = ('Мда, давай еще разок по внимательнее', "Все обыскал, нет блин такого города!\nПопробуй еще раз...")
+excepshon_answer = ('Давай еще разок по внимательнее', "Все обыскал, ненашел такого города!\nПопробуй еще раз...")
 
 owm = OWM(OWM_TOKEN)
 bot = Bot(API_TOKEN)
 
-# owm = OWM('4c714a80d1c7bbf3329a0f310a5ab450')
-# bot = Bot('5352403062:AAEkTwEEcCnNSJSqYzi9xyZzenwosHxSMcQ')
 dp = Dispatcher(bot)
 mgr = owm.weather_manager()
 @dp.message_handler(commands=['start'])
 async def process_start_command(message: types.Message):
-    # await message.answer('Привет, {0.first_name}!'.format(message.from_user)+
-    #                  '\nЯ могу сказать какая погода в твоем городе')
     await message.answer('Привет, {0.first_name}!'.format(message.from_user)+
                      '\nЯ могу сказать какая погода в твоем городе')
 @dp.message_handler(types.Message)
 async def echo_message(message: types.Message):
-    # await message.delete()
+    await message.delete()
     try:
         clouds = {'scattered clouds': 'Ясно',
                   'overcast clouds': 'Облачно',
@@ -48,11 +43,6 @@ async def echo_message(message: types.Message):
 
     except:
         await bot.send_message(message.chat.id, random.choice(excepshon_answer))
-
-
-# input()
-
-
 
 
 if __name__ == '__main__':
