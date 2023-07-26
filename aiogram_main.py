@@ -1,12 +1,16 @@
-# from Tokens import API_TOKEN, OWM_TOKEN
+from Tokens import API_TOKEN, OWM_TOKEN
 from aiogram import Bot, types, Dispatcher, executor
 from pyowm import OWM
 import random
 import os
 
-excepshon_answer = ['Мда, давай еще разок по внимательнее', "Все обыскал, нет блин такого города!\nПопробуй еще раз..."]
-owm = OWM(os.getenv('OWM_TOKEN'))
-bot = Bot(os.getenv('API_TOKEN'))
+excepshon_answer = ('Мда, давай еще разок по внимательнее', "Все обыскал, нет блин такого города!\nПопробуй еще раз...")
+
+owm = OWM(OWM_TOKEN)
+bot = Bot(API_TOKEN)
+
+# owm = OWM('4c714a80d1c7bbf3329a0f310a5ab450')
+# bot = Bot('5352403062:AAEkTwEEcCnNSJSqYzi9xyZzenwosHxSMcQ')
 dp = Dispatcher(bot)
 mgr = owm.weather_manager()
 @dp.message_handler(commands=['start'])
@@ -25,9 +29,14 @@ async def echo_message(message: types.Message):
                   'broken clouds': 'Облачно с прояснениями',
                   'clear sky': 'Чистое небо',
                   'moderate rain': 'Умеренный дождь'}
-        observation = mgr.weather_at_place(message.text)
-        w = observation.weather
-        msg = str(message.text).upper()[0] + str(message.text).lower()[1:]
+        try:
+            observation = mgr.weather_at_place(message.text)
+            w = observation.weather
+            msg = str(message.text).upper()[0] + str(message.text).lower()[1:]
+
+        except:
+            await bot.send_message(message.chat.id, random.choice(excepshon_answer).upper())
+
 
 
         await message.answer((f'Погода в городе {msg}' +
@@ -35,8 +44,8 @@ async def echo_message(message: types.Message):
                                '\n' + f"Скорость ветра {int(w.wind()['speed'])} м/с" +
                                '\n' + (clouds[w.detailed_status] if w.detailed_status in clouds.keys() else '') +
                                '\n' + 'Посмотреть погоду в другом городе?'))
-    # except:
-    #     await bot.send_message(message.chat.id, 'Ошибка! Город не найден.')
+
+
     except:
         await bot.send_message(message.chat.id, random.choice(excepshon_answer))
 
@@ -47,4 +56,4 @@ async def echo_message(message: types.Message):
 
 
 if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=True)
+    executor.start_polling(dp)
