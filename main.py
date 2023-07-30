@@ -28,8 +28,8 @@ def check_callback_data(callback):
                          reply_markup=buttons.keyboard_back)
         print(f'Поиск города по геолокации для пользователя \'{str(user_name)}\' недоступно!)')
     if callback.data == 'input_city_name':
-        bot.send_message(callback.message.chat.id, f'{str(user_name)} напишите название города')
-        print(f'Ожидание ввода пользователя \'{str(user_name)}\'')
+        bot.send_message(callback.message.chat.id, f'{str(user_name)} напиши название города')
+        print(f'Ожидание ввода от пользователя \'{str(user_name)}\'')
 
         @bot.message_handler(func=lambda message: True)
         def search_wether(message):
