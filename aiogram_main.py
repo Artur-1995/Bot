@@ -14,7 +14,7 @@ mgr = owm.weather_manager()
 @dp.message_handler(commands=['start'])
 async def start_command(message: types.Message):
     await bot.send_message(message.chat.id, 'Привет, {0.first_name}!'.format(message.from_user)+
-                     '\nЯ могу сказать какая погода в твоем городе', reply_markup=kb_search)
+                     '\nЯ могу сказать какая погода в твоем городе', reply_markup=kb_search_telebot)
 
 # @dp.callback_query_handler(text="input_city_name")
 # async def send_random_value(callback: types.CallbackQuery):
