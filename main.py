@@ -7,7 +7,6 @@ from dotenv import load_dotenv, find_dotenv
 import buttons
 
 load_dotenv(find_dotenv())
-
 OWM_TOKEN = os.getenv("OWM_TOKEN")
 API_TOKEN = os.getenv("API_TOKEN")
 
