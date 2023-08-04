@@ -1,8 +1,11 @@
-import buttons
+import os
+
 from pyowm import OWM
 import telebot
-import os
 from dotenv import load_dotenv, find_dotenv
+
+import buttons
+
 load_dotenv(find_dotenv())
 
 OWM_TOKEN = os.getenv("OWM_TOKEN")
