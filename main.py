@@ -14,8 +14,8 @@ owm = OWM(OWM_TOKEN)
 bot = telebot.TeleBot(API_TOKEN)
 mgr = owm.weather_manager()
 
-@bot.message_handler(func=lambda message: True)
-# @bot.message_handler(commands=['start'])
+# @bot.message_handler(func=lambda message: True)
+@bot.message_handler(commands=['start'])
 def start_command(message):
     user_name = message.from_user.first_name
 
@@ -55,11 +55,11 @@ def check_callback_data(callback):
                 observation = mgr.weather_at_place(message.text)
                 w = observation.weather
                 msg = str(message.text).upper()[0] + str(message.text).lower()[1:]
-                bot.reply_to(message, (f'Погода в городе {msg}' +
-                                       '\n' + "Температура " + str(int(w.temperature('celsius')['temp'])) +
-                                       '\n' + f"Скорость ветра {int(w.wind()['speed'])} м/с" +
-                                       '\n' + (
-                                           clouds[w.detailed_status] if w.detailed_status in clouds.keys() else '')))
+                bot.reply_to(message, (f'Погода в городе {msg} '
+                                       f'\nТемпература ' + str(int(w.temperature('celsius')['temp'])) +
+                                       f"\nСкорость ветра {int(w.wind()['speed'])} м/с"
+                                       f"\n{(clouds[w.detailed_status] if w.detailed_status in clouds.keys() else '')}"
+                                        ))
 
                 bot.send_message(message.chat.id, text='Посмотреть погоду в другом городе?', reply_markup=buttons.keyboard_continuation)
                 print(f'Пользователь \'{user_name}\' искал погоду в городе \'{message.text}\'')
