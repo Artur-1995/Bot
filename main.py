@@ -1,6 +1,5 @@
 import os
 
-from pyowm import OWM
 import telebot
 from dotenv import load_dotenv, find_dotenv
 

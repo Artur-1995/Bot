@@ -48,10 +48,12 @@ def wether_date(message):
                                '\n' + (
                                    clouds[w.detailed_status] if w.detailed_status in clouds.keys() else '')))
 
-        bot.send_message(message.chat.id, text='Посмотреть погоду в другом городе?',
-                         reply_markup=buttons.keyboard_continuation)
-        print(f'Пользователь \'{str(user_name)}\' искал погоду в городе \'{message.text}\'')
+        answer_user = ['Посмотреть погоду в другом городе?', buttons.keyboard_continuation]
+        answer_admin = f'Пользователь \'{str(user_name)}\' искал погоду в городе \'{message.text}\''
 
-    except:
-        bot.send_message(message.chat.id, 'Ошибка! Город не найден.', reply_markup=buttons.kb_search_telebot_short)
-        print(f'Пользователь \'{str(user_name)}\' ввел нераспознанное названия города \"{message.text}\"')
+    except Exception:
+        answer_user = ['Ошибка! Город не найден.', buttons.kb_search_telebot_short]
+        answer_admin = f'Пользователь \'{str(user_name)}\' ввел нераспознанное названия города \"{message.text}\"'
+
+    bot.send_message(message.chat.id, text=answer_user[0], reply_markup=answer_user[1])
+    print(answer_admin)
